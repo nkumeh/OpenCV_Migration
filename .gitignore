@@ -9,6 +9,9 @@ __pycache__/
 # images saved
 *.jpg
 
+# csv files
+*.csv
+
 # Distribution / packaging
 .Python
 build/

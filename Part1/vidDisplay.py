@@ -15,13 +15,7 @@ def apply_monochrome(frame, threshold_value=127):
     return monochrome_frame
 
 def apply_blur(frame):
-    """Applies a blur using various blur filters.
-    Args:
-        src (cv2.Mat): The input color image (BGR format).
-        
-    Returns:
-        dst (cv2.Mat): The output color image (BGR format).
-    """
+    """Applies a blur using various blur filters."""
     
     # gaussian blur
     # blurred_image = cv2.medianBlur(src, 5)
@@ -38,6 +32,8 @@ def apply_blur(frame):
     return blurred_image
     
 def apply_sobel_x(frame):
+    """Applies a sobel_x filter to frame."""
+
     kernel = np.array([[-1, 0, 1],
                        [-2, 0, 2],
                        [-1, 0, 1]], dtype=np.float32)
@@ -47,6 +43,8 @@ def apply_sobel_x(frame):
 
 
 def apply_sobel_y(frame):
+    """Applies a sobel_y filter to frame."""
+
     kernel = np.array([[-1, -2, -1],
                        [ 0,  0,  0],
                        [ 1,  2,  1]], dtype=np.float32)
@@ -56,11 +54,14 @@ def apply_sobel_y(frame):
     # return cv2.Sobel(image, cv2.CV_64F, 0, 1, ksize=3)
 
 def apply_magnitude(frame):
+    """Applies a magnitude filter to frame, taking in sobel_x and sobel_y."""
+
     # frame = apply_greyscale(frame)  # Read as greyscale
     return cv2.magnitude(apply_sobel_x(frame).astype(np.float32), apply_sobel_y(frame).astype(np.float32))
     # return cv2.sqrt(cv2.addWeighted(cv2.pow(apply_sobel_x(frame).astype(np.float32), 2), 1, cv2.pow(apply_sobel_y(frame).astype(np.float32), 2), 1, 0))
 
 def apply_blur_quantize(frame, levels):
+    """Applies a magnitude filter to frame, taking in sobel_x and sobel_y."""
     # blur image
     blurred_image = apply_blur(frame)
     
